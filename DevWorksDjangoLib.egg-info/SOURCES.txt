@@ -1,4 +1,7 @@
+.gitignore
+manage.py
 pyproject.toml
+requirements.txt
 setup.cfg
 DevWorksDjangoLib/__init__.py
 DevWorksDjangoLib/_version.py
@@ -19,6 +22,8 @@ devworks_django/model.py
 devworks_drf/__init__.py
 devworks_drf/form_field_errors.py
 devworks_drf/oidc.py
+devworks_drf/pagination.py
+devworks_drf/viewset.py
 devworks_drf/permission/__init__.py
 devworks_drf/permission/drf_permissions.py
 devworks_hydra/__init__.py

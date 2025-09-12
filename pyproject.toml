@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "DevWorksDjangoLib"
-#version = "0.0.1" # remove `version` field if dynamic is used!
-dynamic = ["version"]  # The version will be provided dynamically
+version = "0.0.1" # remove `version` field if dynamic is used!
+#dynamic = ["version"]  # The version will be provided dynamically
 description = "DevWorks Django Library"
 authors = [
     { name = "Sambor Czarski", email = "sam.czarski@gmail.com" }
