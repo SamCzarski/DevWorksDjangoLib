@@ -21,13 +21,24 @@ dependencies = ["pydash"]
 - All dependencies are listed in `dependencies`.
 
 
-# Install build tools
+# Create a PyPI account
+- Go to [account register](https://pypi.org/account/register/)
+- **Also create an API token for uploading:**
+  - [Create a token](https://pypi.org/manage/account/token/) `<YOUR_API_TOKEN>`
+  - Click Add API token -> name it `LibraryName-upload`
+  - Copy the token (you’ll use it in `twine`)
 
+
+# Build and upload your library
+
+## Build the distribution
+
+*be sure build tools are installed*
 ```bash
 pip install --upgrade build twine
 ```
 
-# Build the distribution
+*Don't forget to bump your version if not using dynamic versioning!*
 
 ```bash
 python -m build
@@ -40,14 +51,7 @@ dist/
   LibraryName-0.0.1.tar.gz
 ```
 
-# Create a PyPI account
-- Go to [account register](https://pypi.org/account/register/)
-- **Also create an API token for uploading:**
-  - [Create a token](https://pypi.org/manage/account/token/) `<YOUR_API_TOKEN>`
-  - Click Add API token -> name it `LibraryName-upload`
-  - Copy the token (you’ll use it in `twine`)
-
-# Upload to PyPI
+## Upload to PyPI
 
 ```bash
 twine upload dist/* -u __token__ -p <YOUR_API_TOKEN>
@@ -60,15 +64,13 @@ twine upload dist/* -u __token__ -p <YOUR_API_TOKEN>
 twine upload dist/* -u __token__ -p $PYPI_TOKEN
 ```
 
-
-## If you want to test first without publishing publicly, use Test PyPI:
+### If you want to test first without publishing publicly, use Test PyPI:
 
 ```bash
 twine upload --repository testpypi dist/* -u __token__ -p <YOUR_TEST_API_TOKEN>
 ```
 - URL: https://test.pypi.org/
 - Use `pip install --index-url https://test.pypi.org/simple/ LibraryName==0.0.1` to test.
-
 
 # Install your library
 

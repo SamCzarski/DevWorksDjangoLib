@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: DevWorksDjangoLib
-Version: 0.0.2.dev0+g9c7b21a58.d20250912
+Version: 0.0.3
 Summary: DevWorks Django Library
 Author-email: Sambor Czarski <sam.czarski@gmail.com>
 Requires-Dist: pydash
