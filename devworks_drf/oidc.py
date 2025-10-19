@@ -11,7 +11,7 @@ from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
 # from drf_spectacular.extensions import OpenApiAuthenticationExtension
 from requests.exceptions import HTTPError
-from rest_framework import authentication
+from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from urllib3.exceptions import InsecureRequestWarning
 
@@ -27,7 +27,7 @@ WWW_AUTHENTICATE_REALM = 'api'
 AUTHENTICATE_TOKEN_TYPE = 'Bearer'
 
 
-class RemoteService(authentication.BaseAuthentication):
+class RemoteService(BaseAuthentication):
 
     def authenticate_header(self, request):
         return '{} realm="{}"'.format(AUTHENTICATE_TOKEN_TYPE, WWW_AUTHENTICATE_REALM)
