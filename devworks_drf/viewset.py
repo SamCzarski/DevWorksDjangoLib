@@ -1,6 +1,5 @@
 import logging
 
-from django.http import StreamingHttpResponse
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework import mixins
 from rest_framework import viewsets, status
@@ -140,16 +139,6 @@ class SearchViewSet(ReadOnlyModelViewSet):
         self._queryset = self.filter_queryset(
             self.get_queryset()
         )
-
-        if self.request.GET.get('format') == 'csv':
-            def stream():
-                for csv_hits in self._queryset.scan():
-                    yield csv_hits.to_dict()
-
-            return StreamingHttpResponse(
-                request.accepted_renderer.render(stream()),
-                content_type='text/csv'
-            )
 
         stats = {}
         page, hits = self.paginate_queryset(self._queryset)
