@@ -25,15 +25,8 @@ class CommonPagination(PageNumberPagination):
 
     def paginate_queryset(self, queryset, request, view=None):
         self.request = request  # for later use
-        page_size = self.get_page_size(request)
-
-        if page_size:
-            result = super().paginate_queryset(queryset, request, view=view)
-            hits = queryset.execute()
-            return result, hits
-        else:
-            result = queryset.extra(size=0).execute()
-            return result, result
+        result = super().paginate_queryset(queryset, request, view=view)
+        return result
 
     @property
     def current_page_size(self):
@@ -147,30 +140,3 @@ class SearchResultsSetPagination(CommonPagination):
             }
         )
 
-
-class AggregationPagination(CommonPagination):
-
-    def get_paginated_response(self, result, stats=None):
-        self.page = getattr(self, 'page', 0)  # for later use
-        return Response(
-            {
-                'success': True,
-                'results': {
-                    'pages': {
-                        'base_url': self.get_base_link(),
-                        'records': {
-                            "total": self.page.paginator.count if self.page else 0,
-                            "current": len(result)
-                        },
-                        'page': {
-                            "total": self.get_page_count() if self.page else 0,
-                            "current": self.page.number if self.page else 0,
-                            "page_size": self.current_page_size if self.page else 0
-                        }
-
-                    },
-                    'stats': stats or {},
-                    'list': result
-                }
-            }
-        )
